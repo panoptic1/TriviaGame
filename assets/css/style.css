@@ -1,5 +1,5 @@
 /*I attempted to make the answer choices display inline, but they
 are not cooperating*/
-input {
-    display: inline-block;
+body {
+    background-image: url('../images/chalkboard.jpg');
 }

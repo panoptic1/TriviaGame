@@ -1,11 +1,9 @@
-//====================================================VARIABLES========================================================
-    //Two variables to use to check whether answers are right or wrong, when compared to their values
-var correct = "1";
-var incorrect = "0"
+//====================================================VARIABLES=======================================================
 
     //Two variables to store the correct answers which will be used to display the final score upon completion
 var correctAnswers = 0
 var wrongAnswers = 0
+var timer; 
 
 //=================================================LOGIC===============================================================
 
@@ -13,21 +11,21 @@ var wrongAnswers = 0
 $(".card").hide();
 $("#timer").hide();
 $("#results").hide();
+$("#submit").hide();
 
     //Create a function which starts the game and the timer when you press the start button
 $(".start-button").click(function () {
     $(this).hide(); //Hide the start button after clicking on it
     $(".qs").show(); //Show the questions after clicking on the button
+    $("#submit").show();
 
-    var n = 5;
-    setTimeout(countDown, 1000); //IS THIS DOING ANYTHING??? IDK...
+    var n = 60;
+    timer = setInterval(countDown, 1000); //IS THIS DOING ANYTHING??? IDK...
 
     //Create a function for the timer which decrements the value of 'n' by 1 every second. 
     function countDown() {
         n--;
-        if (n > 0) {
-            setTimeout(countDown, 1000);
-        }
+        
         //Show the timer and print the value of 'n' to the time-left box. 
         $("#timer").show();
         $("#time-left").text(n);
@@ -117,7 +115,12 @@ function checkAnswers() {
         $("#results").show();
         $("#correct").text(correctAnswers);
         $("#incorrect").text(wrongAnswers);
+        clearTimeout();
     }
-    $("#submit").click();
+    $("#submit").on("click", function(event){
+        checkAnswers();
+        clearInterval(timer);
+        $("#timer").hide();
+    });
     
 });
