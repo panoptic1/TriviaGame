@@ -3,7 +3,6 @@
     //Two variables to store the correct answers which will be used to display the final score upon completion
 var correctAnswers = 0
 var wrongAnswers = 0
-var timer; 
 
 //=================================================LOGIC===============================================================
 
@@ -20,6 +19,7 @@ $(".start-button").click(function () {
     $("#submit").show();
 
     var n = 60;
+    var timer; //Made this a local function in attempt to clearInterval
     timer = setInterval(countDown, 1000); //IS THIS DOING ANYTHING??? IDK...
 
     //Create a function for the timer which decrements the value of 'n' by 1 every second. 
@@ -115,11 +115,11 @@ function checkAnswers() {
         $("#results").show();
         $("#correct").text(correctAnswers);
         $("#incorrect").text(wrongAnswers);
-        clearTimeout();
+        clearInterval(timer);
     }
+    
     $("#submit").on("click", function(event){
         checkAnswers();
-        clearInterval(timer);
         $("#timer").hide();
     });
     
