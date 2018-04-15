@@ -11,6 +11,7 @@ $(".card").hide();
 $("#timer").hide();
 $("#results").hide();
 $("#submit").hide();
+$("#try-again").hide();
 
     //Create a function which starts the game and the timer when you press the start button
 $(".start-button").click(function () {
@@ -121,6 +122,20 @@ function checkAnswers() {
     $("#submit").on("click", function(event){
         checkAnswers();
         $("#timer").hide();
+        $(this).hide();
+        $("#try-again").show();
     });
+
+    $("#try-again").on("click", function(event){
+        $(".card").show();
+        $("#try-again").hide();
+        $("#submit").show();
+        correctAnswers = 0;
+        wrongAnswers = 0;
+        var n = 60;
+        var timer;
+        timer = setInterval(countDown, 1000);
+        countDown();
+    })
     
 });
